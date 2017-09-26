@@ -21,7 +21,13 @@ h1 > span, h2 > span {
   padding: 5px;
 }
 
-#canvas {
+#defaultCanvas0{
+
+}
+
+#main {
+  position: fixed;
+  display: block;
   /*blank by default*/
   /*opacity: 0;*/
   max-width: 800px;
@@ -45,7 +51,7 @@ h1 > span, h2 > span {
   top: 0px;
   overflow: scroll;
   padding-left: 10px;
-  z-index: 0;
+  z-index: 1;
 }
 
 #terminal p {

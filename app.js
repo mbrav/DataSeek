@@ -5,7 +5,6 @@ var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
 
-var clientsOnline = 0;
 
 app.get('/',function(req, res) {
 	res.sendFile(__dirname + '/client/index.html');
@@ -20,6 +19,7 @@ console.log('SERVER STARTED');
 
 var chatRecord = [];
 var clientRecord = {};
+var clientsOnline = 0;
 
 // RECEIVING DATA
 var io = require('socket.io')(serv,{});
@@ -74,7 +74,7 @@ io.sockets.on('connection', function(socket) {
 });
 
 // server message
-var refresh = 0.1; // set refresh rate (times per second)
+var refresh = 1; // set refresh rate (times per second)
 setInterval(function(){
 
 	io.emit('serverMessage', {

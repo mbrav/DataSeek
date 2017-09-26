@@ -1,2 +1,3 @@
-# DataSeek
-Exploring the undefined boundaries of rational and irrational data
+# DataSein
+
+An existential human data miner

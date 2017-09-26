@@ -3,6 +3,24 @@ var socket = io();
 
 init();
 
+var clientsData;
+
+// P5.js
+function setup() {
+  createCanvas(window.innerWidth, window.innerHeight);
+}
+
+function draw() {
+  if (mouseIsPressed) {
+    fill(0);
+  } else {
+    fill(255);
+  }
+  ellipse(mouseX, mouseY, 80, 80);
+
+}
+// Other
+
 function init() {
   // send player settings
   socket.emit('clientInit', {
@@ -11,12 +29,14 @@ function init() {
 
   // response from the server
   socket.on('clientInitResponse', function(msg){
+    clientsData = msg.clientRecord;
     for (var i = 0; i < msg.chatRecord.length; i++) {
       logConnectedUser(msg.chatRecord[i]);
     }
   });
 
   socket.on('newClientBrodcast', function(msg){
+    clientsData = msg.clientRecord;
     clientsOnline = msg.clientsOnline;
     updateBasedOnClientsOnline(clientsOnline);
 
@@ -42,6 +62,8 @@ function init() {
       + msg.msg
       + "</i>"
       ));
+
+      console.log(clientsData);
   });
 }
 
