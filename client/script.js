@@ -16,16 +16,6 @@ function init() {
     }
   });
 
-  for (var i = 0; i < emails.length; i++) {
-
-    $('#mail-feed')
-      .append($('<h1>').text(emails[i].subject))
-      .append($('<h2>').text(emails[i].from))
-      .append($('<h2>').text("To: " + emails[i].to))
-      .append($('<h2>').text("Time: " + emails[i].timestamp))
-      .append($('<p>').text(emails[i].body));
-  }
-
   socket.on('newClientBrodcast', function(msg){
     clientsOnline = msg.clientsOnline;
     updateBasedOnClientsOnline(clientsOnline);
@@ -73,7 +63,7 @@ function logConnectedUser(dataObject) {
 }
 
 function updateBasedOnClientsOnline(usersOnline) {
-  $('#mail-feed').css("opacity", opacityFormula(usersOnline));
+  // $('#mail-feed').css("opacity", opacityFormula(usersOnline));
   console.log(opacityFormula(usersOnline));
 }
 

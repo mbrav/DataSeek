@@ -19,6 +19,7 @@ serv.listen(2000);
 console.log('SERVER STARTED');
 
 var chatRecord = [];
+var clientRecord = {};
 
 // RECEIVING DATA
 var io = require('socket.io')(serv,{});
@@ -26,7 +27,7 @@ io.sockets.on('connection', function(socket) {
 	// setup the client once his settings are received
 	console.log("New Client");
 	clientsOnline++;
-
+	clientRecord[socket.id] = socket;
 	// update socket data when new position recieved from a player
 	socket.on('clientInit', function(msg) {
 		console.log("new client connected");
@@ -58,12 +59,14 @@ io.sockets.on('connection', function(socket) {
 		});
 	});
 
-
-
 	// disconnect player when he leaves
 	socket.on('disconnect', function() {
 		console.log("Client disconnect");
 		clientsOnline--;
+
+		// delete player
+		delete clientRecord[socket.id];
+
 		io.emit('clientDisconnect', {
 			clientsOnline: clientsOnline
 		});
@@ -74,25 +77,8 @@ io.sockets.on('connection', function(socket) {
 var refresh = 0.1; // set refresh rate (times per second)
 setInterval(function(){
 
-	var serverMessages = [
-		"sounds like it is time you close your browser window ...",
-		"can't read any email's? there aren't any",
-		"CNN claims this is illegal ...",
-		"guess who is going to become presisdent anyway ...",
-		"a f**k up? just blame the Russians",
-		"Sudian Arabian camels...",
-		// "2 politcal parties, 4 banks, 3 oil firms, 4 big media companies, 97 jelly bean flavours, 56 bagel flavours. FREEDOM OF CHOICE!",
-		'"God bless the America we are trying to create."',
-		'"We are going to take things away from you on behalf of the common good."',
-		'"Im not going to have some reporters pawing through our papers."',
-		'"We came, we saw, he died"',
-		'"Its this vast right-wing conspiracy that has been against my husband."',
-		'"Dont let anybody tell you that its corporations and businesses that create jobs."',
-	];
-
 	io.emit('serverMessage', {
-			msg: serverMessages[Math.floor(Math.random()*serverMessages.length)]
-			// msg: "test"
+			msg: "Hello"
 	});
 
 }, 1000/refresh);

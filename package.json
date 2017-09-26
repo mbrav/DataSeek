@@ -1,7 +1,7 @@
 {
-  "name": "data-seek",
+  "name": "datasein",
   "version": "1.0.0",
-  "description": "Exploring the undefined boundaries of rational and irrational data",
+  "description": "A human existence miner",
   "main": "app.js",
   "dependencies": {
     "express": "^4.14.0",
@@ -9,24 +9,23 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Da-Ta!\""
+    "test": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mbrav/DataSeek.git"
+    "url": "git+https://github.com/mbrav/DataSein.git"
   },
   "keywords": [
     "data",
     "surveilance",
-    "rationality",
     "user",
-    "3d",
-    "three.js"
+    "existence",
+    "colonialism"
   ],
   "author": "Michael Braverman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mbrav/DataSeek/issues"
+    "url": "https://github.com/mbrav/DataSein/issues"
   },
-  "homepage": "https://github.com/mbrav/DataSeek#readme"
+  "homepage": "https://github.com/mbrav/DataSein#readme"
 }
