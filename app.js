@@ -16,9 +16,15 @@ app.use(express.static('client'));
 serv.listen(2000);
 console.log('SERVER STARTED');
 
-var chatRecord = [];
+// GENERAL SOCKET AND BACKEND STUFF
 var socketList = {};
 var clientsOnline = 0;
+var chatRecord = [];
+
+// GAME VARIABLES
+
+// capital of players who left
+var deadCapital = 0, aliveCapital = 0, capital = 0;
 
 // RECEIVING DATA
 var io = require('socket.io')(serv,{});
@@ -65,6 +71,9 @@ io.sockets.on('connection', function(socket) {
 		console.log("Client disconnect");
 		clientsOnline--;
 
+		// add the player's Capital to dead Capital
+		deadCapital += socketList[socket.id].dcMined;
+
 		// delete player
 		delete socketList[socket.id];
 
@@ -80,14 +89,14 @@ setInterval(function(){
 	var d = new Date();
 	var n = d.getMilliseconds();
 
-	var dcCapital = 0;
+	aliveCapital = 0;
 
 	for (var i in socketList) {
 		// some data manipulation
 		var old = socketList[i].dcMined;
 		socketList[i].dcMined = old * 1.0+(Math.cos(n/10)+1)/40;
 
-		dcCapital += socketList[i].dcMined;
+		aliveCapital += socketList[i].dcMined;
 
 		// send private message to client
 		var socket = socketList[i];
@@ -96,12 +105,18 @@ setInterval(function(){
 		});
 	}
 
+	capital = aliveCapital + deadCapital;
+
 	// send public message to all clients
 	io.emit('serverMessage', {
 			msg: "Hello Data Miners!",
 			clientsOnline: clientsOnline,
-			dcCapital: dcCapital
+			aliveCapital: aliveCapital,
+			deadCapital: deadCapital,
+			capital: capital
 	});
+
+	console.log(deadCapital, aliveCapital, capital);
 
 }, 1000/refresh);
 

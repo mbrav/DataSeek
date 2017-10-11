@@ -117,7 +117,6 @@ function init() {
 
   });
 
-
   // Public Server Message
   socket.on('serverMessage', function(msg) {
     $('#terminal').append($('<p>').html(
@@ -127,7 +126,7 @@ function init() {
     ));
 
     // sd mined
-    $('#dc-capital').html(truncateDecimals (msg.dcCapital,1));
+    $('#dc-capital').html(truncateDecimals (msg.capital,1));
 
     // sd client online
     $('#client-count').html(msg.clientsOnline);
