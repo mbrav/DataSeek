@@ -80,10 +80,14 @@ setInterval(function(){
 	var d = new Date();
 	var n = d.getMilliseconds();
 
+	var dcCapital = 0;
+
 	for (var i in socketList) {
 		// some data manipulation
 		var old = socketList[i].dcMined;
 		socketList[i].dcMined = old * 1.0+(Math.cos(n/10)+1)/40;
+
+		dcCapital += socketList[i].dcMined;
 
 		// send private message to client
 		var socket = socketList[i];
@@ -95,7 +99,8 @@ setInterval(function(){
 	// send public message to all clients
 	io.emit('serverMessage', {
 			msg: "Hello Data Miners!",
-			clientsOnline: clientsOnline
+			clientsOnline: clientsOnline,
+			dcCapital: dcCapital
 	});
 
 }, 1000/refresh);

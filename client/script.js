@@ -5,7 +5,7 @@ init();
 
 var clientsData;
 
-var xspacing = 16; // Distance between each horizontal location
+var xspacing = 40; // Distance between each horizontal location
 var w; // Width of entire wave
 var theta = 0.0; // Start angle at 0
 var amplitude = 75.0; // Height of wave
@@ -16,16 +16,20 @@ var yvalues; // Using an array to store height values for the wave
 function setup() {
   // createCanvas(200, 200);
   createCanvas(window.innerWidth, window.innerHeight);
-  w = width + 16;
-  dx = (TWO_PI / period) * xspacing;
-  yvalues = new Array(floor(w / xspacing));
+  calc();
 }
 
 function draw() {
   background(0);
   calcWave();
   renderWave();
-  frameRate(10)
+  frameRate(20);
+}
+
+function calc() {
+  w = width + 16;
+  dx = (TWO_PI / period) * xspacing;
+  yvalues = new Array(floor(w / xspacing));
 }
 
 function calcWave() {
@@ -64,6 +68,11 @@ function renderWave() {
 //   // ellipse(mouseX, mouseY, 80, 80);
 // }
 
+function windowResized() {
+  calc();
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 // Other
 function init() {
   // send player settings
@@ -84,7 +93,7 @@ function init() {
     clientsOnline = msg.clientsOnline;
     updateBasedOnClientsOnline(clientsOnline);
 
-    console.log(msg);
+    // console.log(msg);
 
     logConnectedUser(msg.chatRecord);
   });
@@ -104,7 +113,7 @@ function init() {
   socket.on('serverPackage', function(msg) {
 
     // sd mined
-    $('#dc-mined').html(msg.dcMined);
+    $('#dc-mined').html(truncateDecimals (msg.dcMined,3));
 
   });
 
@@ -117,8 +126,11 @@ function init() {
       "</i>"
     ));
 
+    // sd mined
+    $('#dc-capital').html(truncateDecimals (msg.dcCapital,1));
+
     // sd client online
-    $('#client-count').html(truncateDecimals (msg.clientsOnline,2));
+    $('#client-count').html(msg.clientsOnline);
   });
 }
 
@@ -141,14 +153,14 @@ function logConnectedUser(dataObject) {
 
 function updateBasedOnClientsOnline(usersOnline) {
   // $('#mail-feed').css("opacity", opacityFormula(usersOnline));
-  console.log(opacityFormula(usersOnline));
+  // console.log(opacityFormula(usersOnline));
 }
 
 function opacityFormula(usersOnline) {
   return Math.exp(usersOnline / 60) - 1;
 }
 
-truncateDecimals = function (number, digits) {
+function truncateDecimals(number, digits) {
     var multiplier = Math.pow(10, digits),
         adjustedNum = number * multiplier,
         truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
