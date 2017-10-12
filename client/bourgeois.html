@@ -2,21 +2,22 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>DataSein</title>
+    <title>Data$ein Bourgeois</title>
     <meta name="viewport" content="initial-scale=1.0">
     <link href='style.css' rel='stylesheet' type='text/css'>
     <script language="javascript" type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
   </head>
-  <body>
+  <body id="master">
     <div id="main">
-      <h1>Data$ein <br> <span>Your existence currency</span></h1>
+      <h1>Data$ein Bourgeois<br> <span>Their existence, your currency</span></h1>
 
       <div class="notice">
-        <p>Welcome, you and <span id="client-count"></span> other data worker are mining</p>
-        <p>You have mined <span id="dc-mined"></span> D$</p>
-        <!-- <p>Our collective DS Capital is at <span id="dc-capital"></span> DS</p> -->
+        <p>Welcome, you are curently mining <span id="client-count"></span> <i>Homo Economicus</i> </p>
+        <!-- <p>You have mined <span id="dc-mined"></span> D$ Capital</p> -->
+        <p>Your total DS Capital is at <span id="dc-capital"></span> D$</p>
+        <p>Of which <span id="dc-capital-alive"></span> D$ is <b>Alive Labor</b> and <span id="dc-capital-dead"></span> D$ is <b>Dead Labor</b></p>
       </div>
 
     </div>
@@ -24,5 +25,5 @@
     </div>
   </body>
   <script type="text/javascript" src="script.js"></script>
-  <script type="text/javascript" src="sketch.js"></script>
+  <!-- <script type="text/javascript" src="sketch.js"></script> -->
 </html>

@@ -9,6 +9,10 @@ app.get('/',function(req, res) {
 	res.sendFile(__dirname + '/client/index.html');
 });
 
+app.get('/bourgeois',function(req, res) {
+	res.sendFile(__dirname + '/client/bourgeois.html');
+});
+
 // make everything in the /client folder available to the user
 app.use(express.static('client'));
 
@@ -105,6 +109,7 @@ setInterval(function(){
 		});
 	}
 
+	// add alive capital and dead capital
 	capital = aliveCapital + deadCapital;
 
 	// send public message to all clients
@@ -115,8 +120,6 @@ setInterval(function(){
 			deadCapital: deadCapital,
 			capital: capital
 	});
-
-	console.log(deadCapital, aliveCapital, capital);
 
 }, 1000/refresh);
 
