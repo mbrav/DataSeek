@@ -49,11 +49,12 @@ function init() {
 
   // Public Server Message
   socket.on('serverMessage', function(msg) {
-    $('#terminal').append($('<p>').html(
-      "<i>" +
-      msg.msg +
-      "</i>"
-    ));
+    // message test
+    // $('#terminal').append($('<p>').html(
+    //   "<i>" +
+    //   msg.msg +
+    //   "</i>"
+    // ));
 
     // sd mined
     $('#dc-capital').html(truncateDecimals (msg.capital,1));

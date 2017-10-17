@@ -7,6 +7,7 @@ body {
 
 body#master {
   background: url("/img/villa.jpg");
+  background-size:cover;
 }
 
 h1 {
@@ -23,6 +24,7 @@ h2 {
 .notice p {
   background-color: white;
   padding: 5px;
+  font-size: 160%;
 }
 
 h1 > span, h2 > span {
@@ -40,9 +42,10 @@ h1 > span, h2 > span {
   margin: 0 auto;
   position: fixed;
   display: block;
+  text-align: center;
   /*blank by default*/
   /*opacity: 0;*/
-  max-width: 800px;
+  /*max-width: 800px;*/
   z-index: 2;
 }
 
